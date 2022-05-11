@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>[[${title}]]</title>
+
+	<!-- Main Theme Styles + Bootstrap-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+	<!-- {{-- Bootstrap Icons --}} -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+
+	<!-- {{-- My Style --}} -->
+	<link rel="stylesheet" href="/css/style.css" />
+
+	<!-- Page loading styles -->
+	<style>
+		.page-loading {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			-webkit-transition: all 0.4s 0.2s ease-in-out;
+			transition: all 0.4s 0.2s ease-in-out;
+			background-color: #fff;
+			opacity: 0;
+			visibility: hidden;
+			z-index: 9999;
+		}
+
+		.page-loading.active {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.page-loading-inner {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: 100%;
+			text-align: center;
+			-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+			-webkit-transition: opacity 0.2s ease-in-out;
+			transition: opacity 0.2s ease-in-out;
+			opacity: 0;
+		}
+
+		.page-loading.active>.page-loading-inner {
+			opacity: 1;
+		}
+
+		.page-loading-inner>span {
+			display: block;
+			font-size: 1rem;
+			font-weight: normal;
+			color: #9397ad;
+		}
+
+		.page-spinner {
+			display: inline-block;
+			width: 2.75rem;
+			height: 2.75rem;
+			margin-bottom: 0.75rem;
+			vertical-align: text-bottom;
+			border: 0.15em solid #b4b7c9;
+			border-right-color: transparent;
+			border-radius: 50%;
+			-webkit-animation: spinner 0.75s linear infinite;
+			animation: spinner 0.75s linear infinite;
+		}
+
+		@-webkit-keyframes spinner {
+			100% {
+				-webkit-transform: rotate(360deg);
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes spinner {
+			100% {
+				-webkit-transform: rotate(360deg);
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+
+	<!-- Page loading scripts -->
+	<script>
+		(function () {
+			window.onload = function () {
+				const preloader = document.querySelector(".page-loading");
+				preloader.classList.remove("active");
+				setTimeout(function () {
+					preloader.remove();
+				}, 1000);
+			};
+		})();
+	</script>
+</head>
+
+<!-- Body -->
+
+<body>
+	<!-- Page loading spinner -->
+	<div class="page-loading active">
+		<div class="page-loading-inner">
+			<div class="page-spinner"></div>
+			<span>Loading...</span>
+		</div>
+	</div>
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
+		<div class="container">
+			<a class="navbar-brand" href="#">Bag & Shoe Care</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
+				aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarsExample07">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" href="/">Home</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown"
+							aria-expanded="false">Product & Service</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdown07">
+							<li><a class="dropdown-item" href="#">Product</a></li>
+							<li><a class="dropdown-item" href="#">Service</a></li>
+							<li><a class="dropdown-item" href="#">Trace & Track</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">About Us</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ms-auto">
+					<div sec:authorize="isAuthenticated()">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								Welcome Back
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li>
+									<a class="dropdown-item" href="/dashboard"><i
+											class="bi bi-layout-text-sidebar-reverse"></i> My
+										Dashboard</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider" />
+								</li>
+								<li>
+									<form th:action="@{/logout}" method="post">
+										<button type="submit" class="dropdown-item">
+											<i class="bi bi-box-arrow-right"></i> Logout
+										</button>
+									</form>
+								</li>
+							</ul>
+						</li>
+					</div>
+					<div sec:authorize="isAnonymous()">
+						<li class="nav-item">
+							<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#modalLogin">
+								<i class="bi bi-box-arrow-in-right"></i> Login
+							</a>
+						</li>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Content -->
+	<div class="container col-xxl-8 px-4">
+		<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+			<div th:if="${param.error}">
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					Invalid username and password.
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</div>
+			<div th:if="${param.logout}">
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+					You have been logged out.
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</div>
+			<div class="col-10 col-sm-8 col-lg-6">
+				<img src="https://img.jakpost.net/c/2016/05/04/2016_05_04_4149_1462354829._large.jpg"
+					class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500"
+					loading="lazy" />
+			</div>
+			<div class="col-lg-6">
+				<h1 class="display-5 fw-bold lh-1 mb-3">Bag & Shoe Care</h1>
+				<p class="lead">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+					interdum ante et ornare pulvinar. Phasellus quis arcu quis ligula
+					dignissim feugiat. Suspendisse potenti. Pellentesque vel purus id
+					ipsum dignissim finibus et sit amet metus. Quisque viverra lectus
+					tincidunt ultrices placerat. Suspendisse pharetra auctor dui nec
+					blandit. Maecenas vitae congue nulla. Fusce mattis vehicula
+					vulputate. Interdum et malesuada fames ac ante ipsum primis in
+					faucibus. Praesent luctus elit turpis. Cras hendrerit nibh neque, id
+					molestie sem porta a. Ut egestas semper erat.
+				</p>
+
+				<!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
+              Primary
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
+              Default
+            </button>
+          </div> -->
+			</div>
+		</div>
+	</div>
+	<!-- Login -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="modalLogin">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<!-- <h5 class="modal-title">Modal title</h5> -->
+					<h2 class="fw-bold mb-0">Please Login</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5 pt-0">
+					<form th:action="@{/}" method="post">
+						<div class="form-floating mb-3">
+							<input type="email" name="email" class="form-control rounded-4" id="email"
+								placeholder="name@example.com" autofocus required />
+							<label for="email">Email address</label>
+						</div>
+
+						<div class="form-floating mb-3">
+							<input type="password" name="password" class="form-control rounded-4" id="password"
+								placeholder="Password" required />
+							<label for="password">Password</label>
+						</div>
+						<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">
+							Login
+						</button>
+						<small class="text-muted">By clicking Login, you agree to the terms of use.</small>
+						<small class="d-block text-center mt-3">Not registered?
+							<a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#modalRegister">Register
+								Now!</a></small>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Register -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="modalRegister">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<!-- <h5 class="modal-title">Modal title</h5> -->
+					<h2 class="fw-bold mb-0">Register Form</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body p-5 pt-0">
+					<form th:action="@{/process_register}" th:object="${user}" method="post">
+						<div class="form-floating mb-3">
+							<input type="text" name="firstName" th:field="*{firstName}" class="form-control rounded-4"
+								id="firstName" placeholder="firstName" autofocus required />
+							<label for="firstName">First Name</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="text" name="lastName" th:field="*{lastName}" class="form-control rounded-4"
+								id="lastName" placeholder="lastName" autofocus required />
+							<label for="lastName">Last Name</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="email" name="email" th:field="*{email}" class="form-control rounded-4 "
+								id="email" placeholder="name@example.com" required />
+							<label for="email">Email address</label>
+
+						</div>
+						<div class="form-floating mb-3">
+							<input type="password" name="password" th:field="*{password}"
+								class="form-control rounded-4 " id="password" placeholder="Password" />
+							<label for="password">Password</label>
+						</div>
+						<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">
+							Sign up
+						</button>
+						<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+						<small class="d-block text-center mt-3">Already registered?
+							<a href="#" class="nav-link" data-bs-toggle="modal"
+								data-bs-target="#modalLogin">Login</a></small>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<div class="container">
+		<footer class="row row-cols-5 py-5 my-5 border-top">
+			<div class="col">
+				<a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+					<img width="100"
+						src="https://image.winudf.com/v2/image1/Y29tLnNob2VzbG9nb2lkZWFzLmhmemluY19zY3JlZW5fMF8xNTg5ODg0NzIxXzAxMA/screen-0.jpg?fakeurl=1&type=.webp"
+						alt="" />
+					<svg class="bi me-2" width="40" height="32">
+						<use xlink:href="#bootstrap" />
+					</svg>
+				</a>
+				<p class="text-muted">&copy; 2022</p>
+			</div>
+
+			<div class="col"></div>
+
+			<div class="col">
+				<h5>Product & Service</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-muted">Product</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-muted">Service</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-muted">Pricing</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-muted">Trace & Track</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="col">
+				<h5>Blog</h5>
+			</div>
+			<div class="col">
+				<h5>About Us</h5>
+			</div>
+		</footer>
+	</div>
+
+	<!-- Main Theme Script Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
