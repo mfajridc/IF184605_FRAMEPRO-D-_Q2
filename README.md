@@ -5,6 +5,15 @@ Arranged By :<br>
 Ikhlasul Amal Rivel (05111940000145)<br>
 M.Fajri Davyza Chaniago (05111940000180)<br>
 
+## Framework
+Using Java Framework: Spring Boot + Thymeleaf + PostgreSQL
+
+## Deploy
+Using Heroku, link: https://limitless-reef-71145.herokuapp.com/ <br>
+Trial account:<br>
+  Email: admin@gmail.com<br>
+  Password: 12345678
+
 # Getting Started
 
 ### Reference Documentation
