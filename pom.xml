@@ -49,10 +49,14 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -82,9 +86,18 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<processTypes>
+						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+					</processTypes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>3.0.3</version>
+			</plugin>
 		</plugins>
+		
 	</build>
 
 </project>
