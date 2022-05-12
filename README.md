@@ -10,6 +10,7 @@ M.Fajri Davyza Chaniago (05111940000180)<br>
 Using Java Framework: Spring Boot + Thymeleaf + PostgreSQL
 
 ## Deploy
+![](https://img2.pngdownload.id/20180825/cka/kisspng-logo-node-js-heroku-scalable-vector-graphics-font-mode-analytics-status-change-notifications-5b80db51a7dac3.9216631615351714096875.jpg)
 Using Heroku, link: https://limitless-reef-71145.herokuapp.com/ <br>
 Trial account:<br>
  > Email: admin@gmail.com<br>
