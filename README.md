@@ -6,12 +6,12 @@ Ikhlasul Amal Rivel (05111940000145)<br>
 M.Fajri Davyza Chaniago (05111940000180)<br>
 
 ## Framework
-<img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="drawing" width="200"/>
+<img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="drawing" height="200"/>
 <!-- ![](https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg) -->
 Using Java Framework: Spring Boot + Thymeleaf + PostgreSQL
 
 ## Deploy
-
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Heroku_logo.svg/768px-Heroku_logo.svg.png?20210504043420" alt="drawing" height="200"/>
 Using Heroku, link: https://limitless-reef-71145.herokuapp.com/ <br>
 Trial account:<br>
  > Email: admin@gmail.com<br>
