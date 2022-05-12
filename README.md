@@ -6,7 +6,7 @@ Ikhlasul Amal Rivel (05111940000145)<br>
 M.Fajri Davyza Chaniago (05111940000180)<br>
 
 ## Framework
-![](https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg`)
+![]('https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg`)
 Using Java Framework: Spring Boot + Thymeleaf + PostgreSQL
 
 ## Deploy
