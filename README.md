@@ -11,8 +11,8 @@ Using Java Framework: Spring Boot + Thymeleaf + PostgreSQL
 ## Deploy
 Using Heroku, link: https://limitless-reef-71145.herokuapp.com/ <br>
 Trial account:<br>
-  Email: admin@gmail.com<br>
-  Password: 12345678
+ > Email: admin@gmail.com<br>
+ > Password: 12345678
 
 # Getting Started
 
